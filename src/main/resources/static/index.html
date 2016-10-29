@@ -5,17 +5,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js"></script>
-    <script src="app.js" type="text/javascript"></script>
-    <script src="lights.js" type="text/javascript"></script>
-    <!--<script>
+    <script>
 
-    angular.module('heyHue', [
-    heyHue.controllers]);
-
-
-angular.module('heyHue.Controllers', []).
+angular.module('heyHue', []).
 controller('LightController', function($scope, $http) {
-    $http.get('http://localhost:8080/light/1').
+    $http.get('/light/1').
         then(function(response) {
             $scope.light = response.data;
         });
@@ -29,13 +23,13 @@ controller('LightsController', function($scope, $http) {
     return !$scope.nameFilter || keyword.test(light.name);
   };
 
-  $http.get('http://localhost:8080/lights').
+  $http.get('/lights').
     then(function(response) {
       $scope.lights=response.data.lightArray;
       });
 });
 
-    </script>-->
+    </script>
     <title>Your Hue Lights</title>
 </head>
 <body>
