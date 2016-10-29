@@ -1,0 +1,16 @@
+<input type=""text" ng-model="nameFilter" placeholder="Search..."/>
+<table>
+    <thead>
+    <tr><th cospan="2">Lights</th></tr>
+    </thead>
+</table>
+<tbody>
+<table>
+    <tr ng-repeat="light in lights | filter: searchFilter">
+        <td><a href=""#/>lights/{{light.id}}">
+        {{light.name}}
+        </a></td>
+        <td>{{light.state.on}}</td>
+    </tr>
+</tbody>
+</table>

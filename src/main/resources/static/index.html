@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="heyHue">
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
@@ -14,6 +14,12 @@ controller('LightController', function($scope, $http) {
             $scope.light = response.data;
         });
 }).
+config(['$routeProvider', function($routeProvider) {
+  $routeProvider.
+    when("/lights", {templateUrl: "partials/lights.html", controller: "lightsController"}).
+    when("/lights/:id", {templateUrl: "partials/light.html", controller: "lightController"}).
+    otherwise({redirectTo: '/lights'});
+}]).
 
 controller('LightsController', function($scope, $http) {
   $scope.nameFilter = null;
@@ -32,7 +38,18 @@ controller('LightsController', function($scope, $http) {
     </script>
     <title>Your Hue Lights</title>
 </head>
-<body>
+<body ng-app="heyHue">
+    <ng-view></ng-view>
+    <script src=""bower_components/>angular/angular.js"></script>
+    <script src="bower_components/anguler-route/anguler-route.js"></script>
+</body>
+</html>
+
+
+
+
+
+
 <div ng-controller="LightController">
     Welcome to Hue, you!
     <p>Name: {{light.name}}:</p>
@@ -44,14 +61,6 @@ controller('LightsController', function($scope, $http) {
 </div>
 
 <div ng-controller="LightsController">
-    <input type=""text" ng-model="nameFilter" placeholder="Search..."/>
-
-    <table>
-        <tr ng-repeat="light in lights | filter: searchFilter">
-            <td>{{light.name}}</td>
-            <td>{{light.state.on}}</td>
-        </tr>
-    </table>
 </div>
 
 </body>

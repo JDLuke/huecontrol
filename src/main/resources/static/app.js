@@ -1,3 +1,3 @@
-angular.module('heyHue', [
+angular.module('HeyHue', [
   'heyHue.controllers'
   ]);

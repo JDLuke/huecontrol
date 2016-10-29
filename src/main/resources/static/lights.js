@@ -1,4 +1,4 @@
-angularmodule('heyHue.controllers', []).
+angularmodule('HeyHue.controllers', []).
 controller('Light', function($scope, $http) {
     $http.get('http://localhost:8080/light/5').
         then(function(response) {
