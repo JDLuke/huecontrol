@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html ng-app="heyHue">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js"></script>
+    <script src="app.js" type="text/javascript"></script>
+    <script src="lights.js" type="text/javascript"></script>
+    <!--<script>
+
+    angular.module('heyHue', [
+    heyHue.controllers]);
+
+
+angular.module('heyHue.Controllers', []).
+controller('LightController', function($scope, $http) {
+    $http.get('http://localhost:8080/light/1').
+        then(function(response) {
+            $scope.light = response.data;
+        });
+}).
+
+controller('LightsController', function($scope, $http) {
+  $scope.nameFilter = null;
+  $scope.lights = [];
+  $scope.searchFilter = function(light) {
+    var keyword = new RegExp($scope.nameFilter, 'i');
+    return !$scope.nameFilter || keyword.test(light.name);
+  };
+
+  $http.get('http://localhost:8080/lights').
+    then(function(response) {
+      $scope.lights=response.data.lightArray;
+      });
+});
+
+    </script>-->
+    <title>Your Hue Lights</title>
+</head>
+<body>
+<div ng-controller="LightController">
+    Welcome to Hue, you!
+    <p>Name: {{light.name}}:</p>
+    <p>On: {{light.state.on}}</p>
+    <p>Type: {{light.type}}</p>
+    <p>Model: {{light.modelid}}</p>
+    <p>Made by: {{light.manufacturername}}</p>
+    <p></p>
+</div>
+
+<div ng-controller="LightsController">
+    <input type=""text" ng-model="nameFilter" placeholder="Search..."/>
+
+    <table>
+        <tr ng-repeat="light in lights | filter: searchFilter">
+            <td>{{light.name}}</td>
+            <td>{{light.state.on}}</td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

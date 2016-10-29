@@ -1,0 +1,6 @@
+logging:
+  level:
+    org.springframework: DEBUG
+    com.fasterxml: DEBUG
+
+username: xqE10fO4e84n4959UHzsJNBNmyE6-6L9t-qTqXlF
