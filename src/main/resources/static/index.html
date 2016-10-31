@@ -41,7 +41,6 @@ controller('LightsController', function($scope, $http) {
 <body ng-app="heyHue">
     <ng-view></ng-view>
     <script src=""bower_components/>angular/angular.js"></script>
-    <script src="bower_components/anguler-route/anguler-route.js"></script>
 </body>
 </html>
 
@@ -50,18 +49,22 @@ controller('LightsController', function($scope, $http) {
 
 
 
-<div ng-controller="LightController">
-    Welcome to Hue, you!
-    <p>Name: {{light.name}}:</p>
+<div; ng-controller="LightController">
+    Welcome; to; Hue, you!
+    <p>Name;: {{light.name}}:</p>
     <p>On: {{light.state.on}}</p>
     <p>Type: {{light.type}}</p>
     <p>Model: {{light.modelid}}</p>
-    <p>Made by: {{light.manufacturername}}</p>
+    <p>Made; {
+    {
+        light.manufacturername
+    }
+}</p>
     <p></p>
 </div>
 
-<div ng-controller="LightsController">
+<div; ng-controller="LightsController">
 </div>
 
 </body>
-</html>
+</html>;

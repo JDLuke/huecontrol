@@ -1,0 +1,15 @@
+<p ng-click="getLights()">Reload Lights</p>
+
+<table >
+    <thead>
+    <tr>
+        <th cospan="2">Lights</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="light in lights">
+        <td><a href="/light/{{$index}}">{{light.name}}</a></td>
+        <td ng-click='setLightState($index)'>{{light.state.on}}</td>
+    </tr>
+    </tbody>
+</table>

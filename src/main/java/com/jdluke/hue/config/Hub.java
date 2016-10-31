@@ -1,5 +1,8 @@
 package com.jdluke.hue.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.jackson.JsonObjectSerializer;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -46,5 +49,19 @@ public class Hub {
         RestTemplate restTemplate = new RestTemplate();
         Lights lights = restTemplate.getForObject(hubUrl + "/api/" + getUserName() + "/lights", Lights.class);
         return lights;
+    }
+    @Autowired ObjectMapper objectMapper;
+    public void setLightState(int index, State state) {
+        System.out.println("setLightState(" + index + ", " + state + ")");
+        //	/api/<username>/lights/<id>/state
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            state.setAlert("none");
+            String request = objectMapper.writeValueAsString(state);
+            restTemplate.put(hubUrl + "/api/" + getUserName() + "/lights/" + index + "/state", request);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 }

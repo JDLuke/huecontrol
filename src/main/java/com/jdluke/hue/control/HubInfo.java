@@ -1,14 +1,10 @@
 package com.jdluke.hue.control;
 
-import com.jdluke.hue.config.Hub;
-import com.jdluke.hue.config.HueResponse;
-import com.jdluke.hue.config.Light;
-import com.jdluke.hue.config.Lights;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jdluke.hue.config.*;
 import com.jdluke.hue.exceptions.InvalidDeviceException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,13 +15,6 @@ import java.util.List;
 public class HubInfo {
     @Autowired
     private Hub hub;
-
-
-    @RequestMapping("/light/{index}/{desiredState}")
-    String setLightState(@PathVariable int index, @PathVariable String desiredState) {
-       return "Unimplemented, stay tuned!";
-    }
-
 
     @RequestMapping("/light/{index}")
     Light lightAt(@PathVariable int index) {
@@ -53,5 +42,28 @@ public class HubInfo {
     public Lights getLights() {
         System.out.println("/lights");
         return hub.getLights();
+    }
+
+    @Autowired
+    ObjectMapper objectMapper;
+
+    @RequestMapping(value = "/light/{index}", method = RequestMethod.PUT)
+    Light setLightState(@PathVariable int index, @RequestBody String body) {
+
+        try {
+            System.out.println("Body: " + body);
+            State state = objectMapper.readValue(body.toString(), State.class);
+
+            System.out.println("setLightState(" + index + ", " + state + ")");
+            String message = "setLightState received index " + index + " and state " + state;
+            System.out.println(message);
+
+            hub.setLightState(index, state);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return lightAt(index);
     }
 }
